@@ -49,7 +49,13 @@ export const authOptions = {
         strategy:'jwt',
     },
     secret: process.env.NEXTAUTH_SECRET,
-    debug: process.env.NODE_ENV === 'development'
+    debug: process.env.NODE_ENV === 'development',
+    callbacks: {
+        async jwt({token,user,account,profile,isNewUser}) {
+            console.log(token)
+            return token
+        }
+    }
 };
 
 const handler = NextAuth(authOptions);
